@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+@theme {
+	--color-avon-paper: #f3f0e8;
+	--color-avon-ink: #1f1d18;
+	--color-avon-mute: #6e6b64;
+	--color-avon-line: #dedbd2;
+	--color-avon-blue: #2c78c7;
+	--color-avon-light-blue: #b8d9ee;
+	--text-avon-small: min(calc(.3 * 1.2vw + 1rem), 1.54rem);
+	--text-avon-h1: max(calc(min(calc(.3 * 1.2vw + 1rem), 1.54rem) * 1.4), min(calc(1.25 * 1.2vw + .5rem), 2.75rem));
+	--font-sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+}
+
+:root {
+	--avon-field: clamp(30vw, calc(100vw - 4rem - 47.6rem - 4rem), 40vw);
+}
+
+.content-scroll {
+	position: relative;
+	z-index: 1;
+	height: 100%;
+	overflow-y: auto;
+	overflow-x: hidden;
+	overscroll-behavior: contain;
+}
+
+.tagline-gradient {
+	background: linear-gradient(135deg, color-mix(in srgb, var(--color-avon-light-blue) 62%, var(--color-avon-paper)), color-mix(in srgb, var(--color-avon-blue) 34%, var(--color-avon-paper)));
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+	-webkit-text-fill-color: transparent;
+}
+
+.logo-panel-stage {
+	position: absolute;
+	top: -32px;
+	right: 0;
+	z-index: 0;
+	width: 32vw;
+	height: calc(100svh - 36px);
+	pointer-events: none;
+}
+
+.logo-panel {
+	width: 160%;
+	margin-left: -30%;
+	height: 100%;
+	transform: rotate(-18deg);
+	transform-origin: 100% 50%;
+	background-image:
+		url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E"),
+		linear-gradient(180deg, var(--color-avon-light-blue) 0%, var(--color-avon-light-blue) 12%, var(--color-avon-blue) 45%, var(--color-avon-blue) 100%);
+	background-size: 160px 160px, 100% 160%;
+	background-position: 0 0, 50% var(--gradient-position, 0%);
+	background-blend-mode: soft-light, normal;
+	mask: url("/avon-logo.svg") 100% 50% / 100% auto no-repeat;
+	-webkit-mask: url("/avon-logo.svg") 100% 50% / 100% auto no-repeat;
+	filter: brightness(var(--gradient-brightness, 1));
+}
+
+@media (max-width: 900px) {
+	.logo-panel-stage {
+		display: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.content-scroll {
+		scroll-behavior: auto;
+	}
+}

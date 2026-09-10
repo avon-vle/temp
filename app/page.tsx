@@ -55,7 +55,7 @@ export default function HomePage() {
 
 					<section
 						aria-labelledby="page-title"
-						className="mt-[232px] mb-[200px] max-w-[72ch] max-[900px]:mt-[120px] max-[900px]:mb-[96px] max-[560px]:mt-[88px] max-[560px]:mb-[72px]"
+						className="mt-[232px] mb-[200px] max-[900px]:mt-[120px] max-[900px]:mb-[96px] max-[560px]:mt-[88px] max-[560px]:mb-[72px]"
 					>
 						<h1
 							className="text-avon-h1 font-medium leading-[1.15em] tracking-[-.02em] text-balance"
@@ -65,7 +65,7 @@ export default function HomePage() {
 						</h1>
 					</section>
 
-					<section className="my-10 max-w-[72ch] md:my-14">
+					<section className="my-10 md:my-14">
 						<div className="flex flex-col gap-5 text-avon-small font-normal leading-[1.3em] tracking-[-.01em]">
 							<p>
 								Coursework is where understanding becomes practical. A project
@@ -95,7 +95,7 @@ export default function HomePage() {
 						</div>
 					</section>
 
-					<section className="my-10 max-w-[72ch] md:my-14">
+					<section className="my-10 md:my-14">
 						<h2 className="mb-4 text-avon-small font-normal leading-[1.3em] tracking-[-.01em] text-avon-mute">
 							What we're building
 						</h2>
@@ -150,7 +150,7 @@ export default function HomePage() {
 						</div>
 					</section>
 
-					<section className="my-10 max-w-[72ch] md:my-14">
+					<section className="my-10 md:my-14">
 						<h2 className="mb-4 text-avon-small font-normal leading-[1.3em] tracking-[-.01em] text-avon-mute">
 							AI and the work
 						</h2>
@@ -178,7 +178,7 @@ export default function HomePage() {
 						</div>
 					</section>
 
-					<section className="my-10 max-w-[72ch] md:my-14">
+					<section className="my-10 md:my-14">
 						<h2 className="mb-4 text-avon-small font-normal leading-[1.3em] tracking-[-.01em] text-avon-mute">
 							Built around the work
 						</h2>
@@ -203,7 +203,7 @@ export default function HomePage() {
 						</div>
 					</section>
 
-					<section className="my-10 max-w-[72ch] md:my-14">
+					<section className="my-10 md:my-14">
 						<h2 className="mb-4 text-avon-small font-normal leading-[1.3em] tracking-[-.01em] text-avon-mute">
 							Connect the tools you already use
 						</h2>
@@ -252,7 +252,7 @@ export default function HomePage() {
 						</div>
 					</section>
 
-					<section className="my-10 max-w-[72ch] md:my-14">
+					<section className="my-10 md:my-14">
 						<h2 className="mb-4 text-avon-small font-normal leading-[1.3em] tracking-[-.01em] text-avon-mute">
 							Where Avon is going
 						</h2>
@@ -279,7 +279,7 @@ export default function HomePage() {
 						</div>
 					</section>
 
-					<footer className="mt-20 max-w-[72ch] md:mt-28">
+					<footer className="mt-20 md:mt-28">
 						<nav
 							aria-label="Footer"
 							className="flex items-center gap-5 text-avon-small font-normal leading-[1.3em] tracking-[-.01em] text-avon-ink max-[560px]:flex-wrap max-[560px]:gap-x-5 max-[560px]:gap-y-[14px]"

@@ -212,18 +212,19 @@ export default function HomePage() {
 								One LTI 1.3 link is all it takes to set up Avon in your LMS. It
 								works with
 								{lmsProviders.map((provider, index) => (
-									<span className="whitespace-nowrap" key={provider.name}>
+									<span key={provider.name}>
 										{index === 0
 											? " "
 											: index === lmsProviders.length - 1
-												? " and "
+												? " "
 												: ", "}
-										<img
-											alt=""
-											className="inline-block size-[1em] align-[-0.1em] object-contain"
-											src={provider.icon}
-										/>{" "}
-										{provider.name}
+										<span className="inline-block whitespace-nowrap">
+											{index === lmsProviders.length - 1 ? "and " : ""}<img
+												alt=""
+												className="inline-block size-[1em] align-[-0.1em] object-contain"
+												src={provider.icon}
+											/>{" "}{provider.name}
+										</span>
 									</span>
 								))}
 								{"."}
@@ -231,18 +232,19 @@ export default function HomePage() {
 							<p>
 								The code can stay in the Git provider your course already uses:
 								{gitProviders.map((provider, index) => (
-									<span className="whitespace-nowrap" key={provider.name}>
+									<span key={provider.name}>
 										{index === 0
 											? " "
 											: index === gitProviders.length - 1
-												? " and "
+												? " "
 												: ", "}
-										<img
-											alt=""
-											className="inline-block size-[1em] align-[-0.1em] object-contain"
-											src={provider.icon}
-										/>{" "}
-										{provider.name}
+										<span className="inline-block whitespace-nowrap">
+											{index === gitProviders.length - 1 ? "and " : ""}<img
+												alt=""
+												className="inline-block size-[1em] align-[-0.1em] object-contain"
+												src={provider.icon}
+											/>{" "}{provider.name}
+										</span>
 									</span>
 								))}
 								{"."}{" "}Avon connects the coursework flow around them instead

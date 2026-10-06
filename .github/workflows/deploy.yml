@@ -4,22 +4,23 @@ name: Sync and deploy web
 # builds it and deploys to GitHub Pages (avon.ac).
 #
 # Triggers:
-# - repository_dispatch: avon-vle/avon pings this on pushes to main that touch
-#   apps/web or packages/tsconfig.
-# - schedule: hourly safety net in case a dispatch is missed.
+# - push to sync-trigger: on pushes to main touching apps/web or
+#   packages/tsconfig, avon-vle/avon force-pushes a commit (this repo's main
+#   plus an updated .sync-trigger) there. Deploy keys can't send
+#   repository_dispatch, so a branch push is the signal.
+# - schedule: hourly safety net in case a trigger is missed.
 # - workflow_dispatch: manual run.
-# - push: workflow edits in this repo.
+# - push to main: workflow edits in this repo.
 
 on:
-  repository_dispatch:
-    types: [avon-web-updated]
   schedule:
     - cron: "17 * * * *"
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [main, sync-trigger]
     paths:
       - ".github/workflows/deploy.yml"
+      - ".sync-trigger"
 
 permissions:
   contents: write
@@ -41,12 +42,12 @@ jobs:
       changed: ${{ steps.commit.outputs.changed }}
       sha: ${{ steps.commit.outputs.sha }}
     steps:
-      - name: Check sync token
+      - name: Check sync key
         env:
-          AVON_SYNC_TOKEN: ${{ secrets.AVON_SYNC_TOKEN }}
+          AVON_SYNC_SSH_KEY: ${{ secrets.AVON_SYNC_SSH_KEY }}
         run: |
-          if [ -z "$AVON_SYNC_TOKEN" ]; then
-            echo "::error::AVON_SYNC_TOKEN is not set. Add a fine-grained PAT with read-only Contents access to $AVON_REPOSITORY."
+          if [ -z "$AVON_SYNC_SSH_KEY" ]; then
+            echo "::error::AVON_SYNC_SSH_KEY is not set. Add the private half of a read-only deploy key on $AVON_REPOSITORY."
             exit 1
           fi
 
@@ -60,7 +61,7 @@ jobs:
         with:
           repository: ${{ env.AVON_REPOSITORY }}
           ref: ${{ env.AVON_REF }}
-          token: ${{ secrets.AVON_SYNC_TOKEN }}
+          ssh-key: ${{ secrets.AVON_SYNC_SSH_KEY }}
           path: .avon-src
           persist-credentials: false
           sparse-checkout: |

@@ -12,15 +12,16 @@ Temporary public site for Avon at [avon.ac](https://avon.ac), before hosting.
 `packages/tsconfig` preset, vendored into `web/vendor/`), commits it to `web/`,
 builds it with Bun, and deploys `web/dist` to GitHub Pages.
 
-It runs when `avon-vle/avon` dispatches `avon-web-updated` on pushes to `main`,
-hourly as a fallback, and on demand from the Actions tab.
+It runs when `avon-vle/avon` force-pushes to the `sync-trigger` branch (on
+pushes to its `main` that touch the website), hourly as a fallback, and on
+demand from the Actions tab. `sync-trigger` is only a signal; never merge it.
 
 ## Configuration
 
-| Name                  | Kind     | Purpose                                                                            |
-| --------------------- | -------- | ---------------------------------------------------------------------------------- |
-| `AVON_SYNC_TOKEN`     | secret   | Fine-grained PAT with read-only **Contents** access to `avon-vle/avon`.            |
-| `VITE_DOCS_URL`       | variable | Optional docs link target. Defaults to `https://docs.avon.ac`.                     |
+| Name                | Kind     | Purpose                                                        |
+| ------------------- | -------- | -------------------------------------------------------------- |
+| `AVON_SYNC_SSH_KEY` | secret   | Private key for a **read-only** deploy key on `avon-vle/avon`. |
+| `VITE_DOCS_URL`     | variable | Optional docs link target. Defaults to `https://docs.avon.ac`. |
 
 `web/AVON_SOURCE` records the `avon-vle/avon` commit the mirror was taken from.
 

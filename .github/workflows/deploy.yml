@@ -1,12 +1,28 @@
-name: Deploy Next.js site to Pages
+name: Sync and deploy web
+
+# Mirrors apps/web from the private avon-vle/avon monorepo into web/, then
+# builds it and deploys to GitHub Pages (avon.ac).
+#
+# Triggers:
+# - repository_dispatch: avon-vle/avon pings this on pushes to main that touch
+#   apps/web or packages/tsconfig.
+# - schedule: hourly safety net in case a dispatch is missed.
+# - workflow_dispatch: manual run.
+# - push: workflow edits in this repo.
 
 on:
+  repository_dispatch:
+    types: [avon-web-updated]
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
   push:
     branches: [main]
-  workflow_dispatch:
+    paths:
+      - ".github/workflows/deploy.yml"
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -14,45 +30,146 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
+env:
+  AVON_REPOSITORY: avon-vle/avon
+  AVON_REF: main
+
 jobs:
+  sync:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+      sha: ${{ steps.commit.outputs.sha }}
+    steps:
+      - name: Check sync token
+        env:
+          AVON_SYNC_TOKEN: ${{ secrets.AVON_SYNC_TOKEN }}
+        run: |
+          if [ -z "$AVON_SYNC_TOKEN" ]; then
+            echo "::error::AVON_SYNC_TOKEN is not set. Add a fine-grained PAT with read-only Contents access to $AVON_REPOSITORY."
+            exit 1
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Checkout avon (apps/web only)
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.AVON_REPOSITORY }}
+          ref: ${{ env.AVON_REF }}
+          token: ${{ secrets.AVON_SYNC_TOKEN }}
+          path: .avon-src
+          persist-credentials: false
+          sparse-checkout: |
+            apps/web
+            packages/tsconfig
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Copy apps/web into web/
+        run: |
+          # bun.lock is excluded so the standalone lockfile kept in this repo
+          # survives --delete; the monorepo has no per-app lockfile.
+          rsync -a --delete \
+            --exclude node_modules --exclude dist --exclude .turbo \
+            --exclude .DS_Store --exclude bun.lock --exclude vendor \
+            --exclude AVON_SOURCE \
+            .avon-src/apps/web/ web/
+
+          # The only workspace dependency is the shared tsconfig preset.
+          mkdir -p web/vendor
+          rsync -a --delete .avon-src/packages/tsconfig/ web/vendor/tsconfig/
+          jq '.devDependencies["@avon/tsconfig"] = "file:./vendor/tsconfig"' \
+            web/package.json > web/package.json.tmp
+          mv web/package.json.tmp web/package.json
+
+          git -C .avon-src rev-parse HEAD > web/AVON_SOURCE
+          rm -rf .avon-src
+
+      - name: Update lockfile
+        working-directory: web
+        run: bun install
+
+      - name: Commit sync
+        id: commit
+        run: |
+          git add -A web
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            source_sha="$(cat web/AVON_SOURCE)"
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "chore(web): sync from $AVON_REPOSITORY@${source_sha:0:7}"
+            git push origin HEAD:main
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
   build:
+    needs: sync
+    # Hourly runs only rebuild when the sync brought in something new.
+    if: needs.sync.outputs.changed == 'true' || github.event_name != 'schedule'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
         with:
-          version: 10
+          ref: ${{ needs.sync.outputs.sha }}
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: 22
-          cache: pnpm
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+          bun-version: latest
 
       - name: Setup Pages
-        id: setup_pages
         uses: actions/configure-pages@v5
 
-      - name: Build with Next.js
-        run: pnpm build
+      - name: Install dependencies
+        working-directory: web
+        run: bun install --frozen-lockfile
+
+      - name: Build
+        working-directory: web
+        env:
+          VITE_DOCS_URL: ${{ vars.VITE_DOCS_URL || 'https://docs.avon.ac' }}
+        run: bun run build
+
+      - name: Add SPA route fallbacks
+        working-directory: web/dist
+        run: |
+          # Pages has no rewrites: serve the SPA shell at each known route so
+          # deep links return 200, and as 404.html for anything else.
+          cp index.html 404.html
+          # Keep in sync with productRoutePattern in src/website/lib/routes.ts.
+          for route in blog product/provision product/test product/suggest product/assess; do
+            mkdir -p "$route"
+            cp index.html "$route/index.html"
+          done
+          for post in ../src/website/posts/*.md; do
+            slug="$(basename "$post" .md)"
+            case "$slug" in _*) continue ;; esac
+            mkdir -p "blog/$slug"
+            cp index.html "blog/$slug/index.html"
+          done
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ./out
+          path: ./web/dist
 
   deploy:
+    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

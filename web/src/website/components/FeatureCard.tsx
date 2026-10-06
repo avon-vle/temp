@@ -12,7 +12,7 @@ const cardClassName =
   "avon-raised group/card relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-stone-200 bg-stone-50 no-underline transition-[border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-stone-300 hover:shadow-[0_18px_40px_-18px_rgb(24_24_27_/_25%)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] motion-reduce:transition-none motion-reduce:hover:translate-y-0";
 
 const visualClassName =
-  "relative mt-auto h-60 overflow-hidden px-1 sm:h-64 [mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)]";
+  "avon-feature-card-visual relative mt-auto h-60 overflow-hidden px-1 sm:h-64 [mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_70%,transparent_100%)]";
 
 export const FeatureCard = ({
   className = "",

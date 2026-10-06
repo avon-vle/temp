@@ -454,3 +454,26 @@ html.avon-theme-dark .avon-site .bg-stone-950 {
 html.avon-theme-dark .avon-logo-strip-item img {
   filter: brightness(1.05);
 }
+
+/* Feature card mocks bind to the light-only semantic product tokens in
+   styles.css; give them dark values inside the homepage cards. */
+html.avon-theme-dark .avon-site .avon-feature-card-visual {
+  --background: #111318;
+  --foreground: #e7e5e4;
+  --card: #1a1d24;
+  --card-foreground: #e7e5e4;
+  --muted: #13161c;
+  --muted-foreground: #a1a1aa;
+  --border: #2b3039;
+  --input: #38404d;
+  --accent: #1f232b;
+  --accent-foreground: #f5f5f4;
+}
+
+html.avon-theme-dark .avon-site .avon-feature-card-visual .text-emerald-700 {
+  color: #3fb950 !important;
+}
+
+html.avon-theme-dark .avon-site .avon-feature-card-visual .text-violet-700 {
+  color: #a78bfa !important;
+}

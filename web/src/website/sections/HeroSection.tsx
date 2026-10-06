@@ -39,7 +39,7 @@ export const HeroSection = () => (
               className="group inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/12 py-1 pl-1 pr-3 text-[13px] font-medium text-white no-underline backdrop-blur-md transition-colors hover:border-white/50 hover:bg-white/20"
               href={blogPostPath("introducing-avon")}
             >
-              <span className="rounded-full bg-white px-2 py-0.5 text-[12px] font-semibold text-[var(--avon-sky-blue)]">
+              <span className="rounded-full bg-[var(--avon-footer-button-bg)] px-2 py-0.5 text-[12px] font-semibold text-[var(--avon-footer-button-text)]">
                 New
               </span>
               Introducing Avon

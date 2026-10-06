@@ -23,6 +23,7 @@ on:
       - ".sync-trigger"
 
 permissions:
+  actions: write
   contents: write
   pages: write
   id-token: write
@@ -113,10 +114,20 @@ jobs:
           fi
           echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
+      # The github-pages environment only accepts deployments from main, so a
+      # sync-trigger run hands off to a fresh run on main instead of deploying.
+      - name: Deploy from main
+        if: github.ref == 'refs/heads/sync-trigger'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --repo "$GITHUB_REPOSITORY" --ref main
+
   build:
     needs: sync
     # Hourly runs only rebuild when the sync brought in something new.
-    if: needs.sync.outputs.changed == 'true' || github.event_name != 'schedule'
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (needs.sync.outputs.changed == 'true' || github.event_name != 'schedule')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

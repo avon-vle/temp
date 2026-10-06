@@ -1,0 +1,456 @@
+.avon-site,
+:root {
+  --avon-glass-bg: rgb(255 255 255 / 90%);
+  --avon-glass-border: rgb(228 228 231 / 90%);
+  --avon-glass-blur: blur(14px);
+  --avon-glass-shadow: 0 2px 8px rgb(24 24 27 / 10%);
+}
+
+.avon-display {
+  font-size: clamp(1.875rem, 2.25rem, 4.5rem);
+  line-height: 1.05;
+}
+
+.avon-hero-statement {
+  font-size: clamp(2.5rem, 6vw, 4.75rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+.avon-hero-statement,
+.avon-hero-subtitle {
+  text-shadow: 0 1px 12px rgb(2 52 120 / 18%);
+}
+
+.avon-section-title {
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+@media (min-width: 640px) {
+  .avon-display {
+    font-size: clamp(2.25rem, 3rem, 4.5rem);
+  }
+}
+
+.avon-section-title {
+  font-size: clamp(1.875rem, 2rem, 3.75rem);
+  line-height: 1.04;
+}
+
+@media (min-width: 640px) {
+  .avon-section-title {
+    font-size: clamp(2rem, 2.75rem, 3.75rem);
+  }
+}
+
+.avon-footer-title {
+  font-size: clamp(2rem, 2.5rem, 4.5rem);
+  line-height: 1.02;
+}
+
+.avon-site-footer {
+  --avon-footer-body-text: rgb(255 255 255 / 84%);
+  --avon-footer-link-text: rgb(255 255 255 / 74%);
+  --avon-footer-muted-text: rgb(255 255 255 / 64%);
+  --avon-footer-divider: rgb(255 255 255 / 20%);
+  --avon-footer-divider-subtle: rgb(255 255 255 / 16%);
+  --avon-footer-text-shadow: 0 1px 2px rgb(15 23 42 / 22%);
+}
+
+html.avon-theme-dark .avon-site-footer {
+  --avon-footer-body-text: rgb(255 255 255 / 90%);
+  --avon-footer-link-text: rgb(255 255 255 / 80%);
+  --avon-footer-muted-text: rgb(255 255 255 / 70%);
+  --avon-footer-divider: rgb(255 255 255 / 22%);
+  --avon-footer-divider-subtle: rgb(255 255 255 / 18%);
+  --avon-footer-text-shadow: 0 1px 3px rgb(0 0 0 / 40%);
+}
+
+.avon-site-footer-copy {
+  text-shadow: var(--avon-footer-text-shadow);
+}
+
+.avon-site-nav-pill {
+  background-color: var(--avon-glass-bg);
+  border-color: var(--avon-glass-border);
+  border-radius: 9999px;
+  backdrop-filter: var(--avon-glass-blur);
+}
+
+.avon-product-dropdown--hero,
+.avon-product-dropdown--light {
+  /* Product chrome preview — zinc light system */
+  --avon-dropdown-bg: #fff;
+  --avon-dropdown-border: #e4e4e7; /* zinc-200 */
+  --avon-dropdown-shadow: 0 16px 48px rgb(24 24 27 / 10%);
+  --avon-dropdown-highlight: #f4f4f5; /* zinc-100 */
+  --avon-dropdown-preview-bg: #fafafa; /* zinc-50 / zinc-25-ish */
+  --avon-dropdown-preview-panel-bg: #fff;
+  --avon-dropdown-title: #27272a; /* zinc-800 */
+  --avon-dropdown-desc: #71717a; /* zinc-500 */
+  --avon-dropdown-focus-text: #18181b; /* zinc-900 */
+}
+
+.avon-product-dropdown--dark {
+  --avon-dropdown-bg: #111318;
+  --avon-dropdown-border: #2b3039;
+  --avon-dropdown-shadow: 0 16px 48px rgb(0 0 0 / 36%);
+  --avon-dropdown-highlight: #1a1d24;
+  --avon-dropdown-preview-bg: #0f1115;
+  --avon-dropdown-preview-panel-bg: #111318;
+  --avon-dropdown-title: #f5f5f4;
+  --avon-dropdown-desc: #a8a29e;
+  --avon-dropdown-focus-text: #f5f5f4;
+}
+
+.avon-product-dropdown--floating {
+  --avon-dropdown-bg: var(--avon-glass-bg);
+  --avon-dropdown-border: var(--avon-glass-border);
+  --avon-dropdown-shadow: var(--avon-glass-shadow);
+  backdrop-filter: var(--avon-glass-blur);
+}
+
+.avon-nav-feature-visual--light {
+  /* Product window mock — light t3code zinc surfaces */
+  --avon-nfv-border: #e4e4e7;
+  --avon-nfv-surface: #fafafa;
+  --avon-nfv-panel: #fff;
+  --avon-nfv-muted: #71717a;
+  --avon-nfv-strong: #3f3f46;
+  --avon-nfv-header: #71717a;
+  --avon-nfv-ring: #e4e4e7;
+  --avon-nfv-log-fade: linear-gradient(
+    to bottom,
+    rgb(250 250 250 / 96%) 0%,
+    rgb(250 250 250 / 76%) 42%,
+    rgb(250 250 250 / 0%) 100%
+  );
+  --avon-ai-accent: #6d28d9;
+  --avon-ai-bg: #f5f3ff;
+  --avon-ai-border: #ddd6fe;
+  --avon-ai-text: #5b21b6;
+}
+
+.avon-nav-feature-visual--dark {
+  --avon-nfv-border: #2b3039;
+  --avon-nfv-surface: #111318;
+  --avon-nfv-panel: #1a1d24;
+  --avon-nfv-muted: #a8a29e;
+  --avon-nfv-strong: #f5f5f4;
+  --avon-nfv-header: #a8a29e;
+  --avon-nfv-ring: #2b3039;
+  --avon-nfv-log-fade: linear-gradient(
+    to bottom,
+    rgb(17 19 24 / 96%) 0%,
+    rgb(17 19 24 / 76%) 42%,
+    rgb(17 19 24 / 0%) 100%
+  );
+  --avon-ai-accent: #a78bfa;
+  --avon-ai-bg: #211a34;
+  --avon-ai-border: #4c3b73;
+  --avon-ai-text: #ddd6fe;
+}
+
+.avon-mobile-sidebar {
+  --avon-mobile-sidebar-bg: #fff;
+  --avon-mobile-sidebar-text: #18181b;
+  --avon-mobile-sidebar-muted: #71717a;
+  --avon-mobile-sidebar-border: #e4e4e7;
+  --avon-mobile-sidebar-border-subtle: #f4f4f5;
+  --avon-mobile-sidebar-primary-bg: oklch(0.488 0.217 264);
+  --avon-mobile-sidebar-primary-text: #fff;
+  --avon-mobile-sidebar-separator: #d4d4d8;
+  --avon-mobile-sidebar-shadow: var(--avon-glass-shadow);
+}
+
+.avon-mobile-sidebar-logo {
+  filter: brightness(0);
+}
+
+.avon-mobile-dropdown {
+  --avon-mobile-sidebar-bg: var(--avon-glass-bg);
+  --avon-mobile-sidebar-border: var(--avon-glass-border);
+  backdrop-filter: var(--avon-glass-blur);
+}
+
+.avon-site {
+  --avon-eyebrow: oklch(0.488 0.217 264);
+  --avon-eyebrow-soft: color-mix(in srgb, oklch(0.488 0.217 264) 10%, white);
+  --avon-feature-card-hover-border: rgb(228 228 231);
+  --avon-feature-card-overlay: linear-gradient(
+    to bottom,
+    rgb(255 255 255 / 0%) 0%,
+    rgb(255 255 255 / 70%) 44%,
+    rgb(255 255 255 / 98%) 100%
+  );
+  --avon-feature-card-overlay-hover: linear-gradient(
+    to bottom,
+    rgb(250 250 250 / 0%) 0%,
+    rgb(250 250 250 / 82%) 44%,
+    rgb(250 250 250 / 98%) 100%
+  );
+  --avon-footer-button-bg: #fff;
+  --avon-footer-button-hover: #f4f4f5;
+  --avon-footer-button-text: #27272a;
+  --avon-site-nav-pill-shadow: var(--avon-glass-shadow);
+  --avon-ai-accent: #6d28d9;
+  --avon-ai-bg: #f5f3ff;
+  --avon-ai-border: #ddd6fe;
+  --avon-ai-text: #5b21b6;
+  --avon-diff-add-bg: #ecfdf5;
+  --avon-diff-add-sign: #047857;
+  --avon-diff-add-text: #065f46;
+  --avon-diff-remove-bg: #fef2f2;
+  --avon-diff-remove-sign: #dc2626;
+  --avon-diff-remove-text: #991b1b;
+  /* Primary blue from product design system */
+  --avon-editor-gradient: linear-gradient(
+    to bottom,
+    oklch(0.488 0.217 264) 0%,
+    #b9e1ff 100%
+  );
+  --avon-test-log-top-fade: linear-gradient(
+    to bottom,
+    rgb(250 250 250 / 96%) 0%,
+    rgb(250 250 250 / 76%) 42%,
+    rgb(250 250 250 / 0%) 100%
+  );
+}
+
+.avon-provision-product-preview {
+  /* Matches @avon/app light t3code product chrome */
+  --avon-provision-demo-bg: #fafafa;
+  --avon-provision-demo-surface: #fff;
+  --avon-provision-demo-subtle: #f4f4f5;
+  --avon-provision-demo-border: #e4e4e7;
+  --avon-provision-demo-fg: #27272a;
+  --avon-provision-demo-muted: #71717a;
+  --avon-provision-demo-blue: oklch(0.488 0.217 264);
+  --avon-provision-demo-blue-soft: color-mix(
+    in srgb,
+    oklch(0.488 0.217 264) 12%,
+    transparent
+  );
+  --avon-provision-demo-connector: color-mix(
+    in srgb,
+    oklch(0.488 0.217 264) 40%,
+    transparent
+  );
+  --avon-provision-demo-green: var(--color-emerald-600, #059669);
+  --avon-provision-demo-button: var(--color-emerald-600, #059669);
+  --avon-provision-demo-button-border: rgb(24 24 27 / 12%);
+  --avon-provision-demo-inset: #f4f4f5;
+}
+
+@media (min-width: 640px) {
+  .avon-footer-title {
+    font-size: clamp(2.5rem, 3.25rem, 4.5rem);
+  }
+}
+
+html.avon-theme-dark {
+  color-scheme: dark;
+  --avon-page-bg: #111318;
+  --avon-sky-blue: #020511;
+  --avon-glass-bg: rgb(17 19 24 / 88%);
+  --avon-glass-border: rgb(43 48 57 / 92%);
+  --avon-glass-shadow: 0 2px 8px rgb(0 0 0 / 22%);
+}
+
+html.avon-theme-dark .avon-site-nav-pill {
+  background-color: var(--avon-glass-bg);
+  border-color: var(--avon-glass-border);
+}
+
+html.avon-theme-dark .avon-mobile-sidebar {
+  --avon-mobile-sidebar-bg: #111318;
+  --avon-mobile-sidebar-text: #f5f5f4;
+  --avon-mobile-sidebar-muted: #a8a29e;
+  --avon-mobile-sidebar-border: #2b3039;
+  --avon-mobile-sidebar-border-subtle: #252a33;
+  --avon-mobile-sidebar-primary-bg: #f5f5f4;
+  --avon-mobile-sidebar-primary-text: #181511;
+  --avon-mobile-sidebar-separator: #2b3039;
+  --avon-mobile-sidebar-shadow: 0 2px 8px rgb(0 0 0 / 22%);
+}
+
+html.avon-theme-dark .avon-mobile-sidebar-logo {
+  filter: brightness(0) invert(1);
+}
+
+html.avon-theme-dark .avon-site {
+  --avon-eyebrow: #7cb4ff;
+  --avon-eyebrow-soft: rgb(124 180 255 / 14%);
+  /* Override light glass tokens from `.avon-site, :root` so solid/floating
+     chrome (product dropdown, nav pill) stays dark-themed. */
+  --avon-glass-bg: rgb(17 19 24 / 88%);
+  --avon-glass-border: rgb(43 48 57 / 92%);
+  --avon-glass-shadow: 0 2px 8px rgb(0 0 0 / 22%);
+  --avon-footer-button-bg: #fff;
+  --avon-footer-button-hover: #f5f5f4;
+  --avon-footer-button-text: #1c1917;
+  --avon-site-nav-pill-shadow: var(--avon-glass-shadow);
+  --avon-feature-card-hover-border: #38404d;
+  --avon-feature-card-overlay: linear-gradient(
+    to bottom,
+    rgb(17 19 24 / 0%) 0%,
+    rgb(17 19 24 / 78%) 44%,
+    rgb(17 19 24 / 98%) 100%
+  );
+  --avon-feature-card-overlay-hover: linear-gradient(
+    to bottom,
+    rgb(26 29 36 / 0%) 0%,
+    rgb(26 29 36 / 82%) 44%,
+    rgb(26 29 36 / 98%) 100%
+  );
+  --avon-ai-accent: #a78bfa;
+  --avon-ai-bg: #211a34;
+  --avon-ai-border: #4c3b73;
+  --avon-ai-text: #ddd6fe;
+  --avon-diff-add-bg: #10291f;
+  --avon-diff-add-sign: #3fb950;
+  --avon-diff-add-text: #7ee787;
+  --avon-diff-remove-bg: #2d1518;
+  --avon-diff-remove-sign: #ff7b72;
+  --avon-diff-remove-text: #ffa198;
+  --avon-editor-gradient: linear-gradient(
+    to bottom,
+    #020511 0%,
+    #10213d 54%,
+    #1b3357 100%
+  );
+  --avon-test-log-top-fade: linear-gradient(
+    to bottom,
+    rgb(17 19 24 / 96%) 0%,
+    rgb(17 19 24 / 76%) 42%,
+    rgb(17 19 24 / 0%) 100%
+  );
+  background-color: #111318 !important;
+  color: #f5f5f4 !important;
+}
+
+html.avon-theme-dark .avon-provision-product-preview {
+  --avon-provision-demo-bg: #111318;
+  --avon-provision-demo-surface: #171a20;
+  --avon-provision-demo-subtle: #1d2128;
+  --avon-provision-demo-border: #30363d;
+  --avon-provision-demo-fg: #f0f3f6;
+  --avon-provision-demo-muted: #9ca4ae;
+  --avon-provision-demo-blue: #58a6ff;
+  --avon-provision-demo-blue-soft: rgb(56 139 253 / 14%);
+  --avon-provision-demo-connector: rgb(88 166 255 / 38%);
+  --avon-provision-demo-green: #3fb950;
+  --avon-provision-demo-button: #238636;
+  --avon-provision-demo-button-border: rgb(240 246 252 / 10%);
+  --avon-provision-demo-inset: #262c36;
+}
+
+html.avon-theme-dark
+  .avon-site
+  :is(.bg-white, .bg-stone-50, .bg-stone-50\/65, .bg-stone-100) {
+  background-color: #111318 !important;
+}
+
+html.avon-theme-dark .avon-site :is(.bg-stone-200, .bg-stone-300) {
+  background-color: #252a33 !important;
+}
+
+html.avon-theme-dark
+  .avon-site
+  :is(
+    .text-\[\#181511\],
+    .text-stone-950,
+    .text-stone-900,
+    .text-stone-800,
+    .text-stone-700
+  ) {
+  color: #f5f5f4 !important;
+}
+
+html.avon-theme-dark .avon-site :is(.text-stone-600, .text-stone-500) {
+  color: #a8a29e !important;
+}
+
+html.avon-theme-dark
+  .avon-site
+  :is(.border-stone-100, .border-stone-200, .border-stone-300) {
+  border-color: #2b3039 !important;
+}
+
+html.avon-theme-dark .avon-site .after\:bg-stone-200::after,
+html.avon-theme-dark .avon-site .before\:bg-stone-200::before,
+html.avon-theme-dark .avon-site .sm\:before\:bg-stone-200::before {
+  background-color: #2b3039 !important;
+}
+
+html.avon-theme-dark
+  .avon-site
+  :is(.hover\:bg-stone-50:hover, .hover\:bg-stone-100:hover) {
+  background-color: #1a1d24 !important;
+}
+
+html.avon-theme-dark
+  .avon-site
+  :is(.hover\:text-stone-950:hover, .hover\:text-stone-800:hover) {
+  color: #fff !important;
+}
+
+html.avon-theme-dark
+  .avon-site
+  .shadow-\[0_16px_48px_rgb\(24_21_17_\/_12\%\)\] {
+  box-shadow: 0 16px 48px rgb(0 0 0 / 36%) !important;
+}
+
+html.avon-theme-dark
+  .avon-site
+  .shadow-\[0_24px_60px_rgb\(24_21_17_\/_22\%\)\] {
+  box-shadow: 0 24px 60px rgb(0 0 0 / 42%) !important;
+}
+
+html.avon-theme-dark
+  .avon-site
+  .shadow-\[0_28px_70px_rgb\(24_21_17_\/_22\%\)\] {
+  box-shadow: 0 28px 70px rgb(0 0 0 / 44%) !important;
+}
+
+html.avon-theme-dark .avon-site .bg-\[var\(--avon-sky-blue\)\] {
+  background-color: #020511 !important;
+}
+
+html.avon-theme-dark .avon-site .bg-\[\#181511\] {
+  background-color: #f5f5f4 !important;
+  color: #181511 !important;
+}
+
+html.avon-theme-dark .avon-site .border-white\/40 {
+  border-color: rgb(255 255 255 / 18%) !important;
+}
+
+html.avon-theme-dark .avon-site .avon-hero-top-fade {
+  opacity: 1;
+}
+
+/* Cards that sit one step above the page surface. Declared after the blanket
+   dark-mode background overrides so it wins at equal specificity. */
+html.avon-theme-dark .avon-site .avon-raised {
+  background-color: #161920 !important;
+}
+
+html.avon-theme-dark .avon-site .avon-raised:hover {
+  border-color: #3a4250 !important;
+}
+
+html.avon-theme-dark .avon-site .avon-step-number {
+  background-color: #f5f5f4 !important;
+  color: #111318 !important;
+}
+
+html.avon-theme-dark .avon-site .bg-stone-950 {
+  background-color: #f5f5f4 !important;
+}
+
+html.avon-theme-dark .avon-logo-strip-item img {
+  filter: brightness(1.05);
+}

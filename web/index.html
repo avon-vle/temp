@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Avon</title>
+    <meta name="theme-color" content="#0273f1" id="avon-theme-color" />
+    <link
+      rel="icon"
+      href="/favicon-dark.ico"
+      media="(prefers-color-scheme: light)"
+    />
+    <link rel="icon" href="/favicon.ico" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/svg+xml" href="public/favicon.svg" />
+    <link rel="shortcut icon" href="public/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="public/apple-touch-icon.png"
+    />
+    <meta name="apple-mobile-web-app-title" content="Avon" />
+    <link rel="manifest" href="public/site.webmanifest" />
+    <style>
+      :root {
+        --avon-load-step: 85ms;
+        --avon-page-bg: #fff;
+        --avon-sky-blue: #0273f1;
+        --avon-hero-image: url("/hero-sky-campus-day.webp");
+        --avon-hero-border: #fff;
+        --avon-footer-bg: #0273f1;
+        --avon-footer-ground-bg: #0273f1;
+        --avon-footer-image: url("/hero-scenic.webp");
+        --avon-footer-overlay: linear-gradient(
+          to bottom,
+          rgb(2 115 241 / 65%),
+          rgb(2 115 241 / 82%)
+        );
+        --avon-blog-paint-bg: #faf9f5;
+      }
+
+      html,
+      body {
+        margin: 0;
+      }
+
+      html.avon-homepage,
+      html.avon-homepage body {
+        min-height: 100%;
+      }
+
+      html.avon-homepage {
+        background: var(--avon-footer-ground-bg);
+        overscroll-behavior-y: none;
+      }
+
+      html.avon-homepage body {
+        background: transparent;
+        overscroll-behavior: none;
+      }
+
+      html.avon-blog,
+      html.avon-blog body {
+        background: var(--avon-blog-paint-bg);
+      }
+
+      html.avon-homepage #root:empty {
+        background: var(--avon-page-bg);
+        display: block;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      html.avon-homepage #root:empty::before {
+        background-color: var(--avon-sky-blue);
+        background-image: var(--avon-hero-image);
+        background-position: center;
+        background-size: cover;
+        border-bottom: 1px solid var(--avon-hero-border);
+        content: "";
+        display: block;
+        height: 33.5rem;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
+      html.avon-blog #root:empty {
+        background: inherit;
+        display: block;
+        min-height: 100vh;
+      }
+
+      .avon-initial-nav {
+        align-items: center;
+        box-sizing: border-box;
+        color: #fff;
+        display: none;
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Helvetica Neue",
+          sans-serif;
+        gap: 2rem;
+        height: 3rem;
+        left: 50%;
+        max-width: 80rem;
+        padding: 0 1.5rem;
+        pointer-events: none;
+        position: absolute;
+        top: max(1.25rem, env(safe-area-inset-top, 0px));
+        transform: translateX(-50%);
+        width: 100%;
+        z-index: 30;
+      }
+
+      html.avon-homepage .avon-initial-nav {
+        display: flex;
+      }
+
+      #root:not(:empty) + .avon-initial-nav {
+        display: none;
+      }
+
+      .avon-initial-nav__brand {
+        display: block;
+        filter: drop-shadow(0 1px 1px rgb(0 0 0 / 12%));
+        height: 1.5rem;
+        width: auto;
+      }
+
+      .avon-initial-nav__links,
+      .avon-initial-nav__actions {
+        align-items: center;
+        display: flex;
+      }
+
+      .avon-initial-nav__links {
+        gap: 1.75rem;
+      }
+
+      .avon-initial-nav__link {
+        color: rgb(255 255 255 / 75%);
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-decoration: none;
+        text-shadow: 0 1px 1px rgb(0 0 0 / 12%);
+      }
+
+      .avon-initial-nav__product {
+        align-items: center;
+        display: flex;
+        gap: 0.375rem;
+      }
+
+      .avon-initial-nav__actions {
+        gap: 0.5rem;
+        margin-left: auto;
+      }
+
+      .avon-initial-nav__sign-in,
+      .avon-initial-nav__menu {
+        align-items: center;
+        border: 1px solid rgb(255 255 255 / 30%);
+        box-sizing: border-box;
+        color: #fff;
+        display: flex;
+        font-size: 0.875rem;
+        font-weight: 500;
+        height: 2.25rem;
+        justify-content: center;
+        text-decoration: none;
+      }
+
+      .avon-initial-nav__sign-in {
+        border-radius: 0.5rem;
+        padding: 0 1rem;
+      }
+
+      .avon-initial-nav__menu {
+        border-radius: 9999px;
+        display: none;
+        height: 2.5rem;
+        margin-left: auto;
+        width: 2.5rem;
+      }
+
+      .avon-initial-nav svg {
+        display: block;
+      }
+
+      html.avon-home-route #root:empty::before {
+        height: 44rem;
+      }
+
+      @media (min-width: 640px) {
+        html.avon-homepage #root:empty::before {
+          height: 41.5rem;
+        }
+
+        html.avon-home-route #root:empty::before {
+          height: 44rem;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        html.avon-homepage #root:empty::before {
+          height: 42.5rem;
+        }
+
+        .avon-initial-nav {
+          padding-left: 2rem;
+          padding-right: 2rem;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .avon-initial-nav__links,
+        .avon-initial-nav__actions {
+          display: none;
+        }
+
+        .avon-initial-nav__menu {
+          display: flex;
+        }
+      }
+    </style>
+    <script>
+      (function () {
+        var path = window.location.pathname;
+        var themeColor = document.getElementById("avon-theme-color");
+        var root = document.documentElement;
+
+        var isBlog = /^\/blog(\/|$)/u.test(path);
+
+        var storedTheme = window.localStorage.getItem("avon.website.theme");
+        var mode =
+          storedTheme === "light" ||
+          storedTheme === "dark" ||
+          storedTheme === "system"
+            ? storedTheme
+            : "system";
+        var resolved =
+          mode === "system"
+            ? window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light"
+            : mode;
+        var dark = resolved === "dark";
+
+        root.dataset.avonTheme = mode;
+        root.dataset.avonResolvedTheme = resolved;
+        root.classList.toggle("avon-theme-dark", dark);
+        root.classList.toggle("avon-theme-light", !dark);
+
+        if (isBlog) {
+          root.classList.add("avon-blog");
+          root.style.setProperty(
+            "--avon-blog-paint-bg",
+            dark ? "#111318" : "#faf9f5",
+          );
+          root.style.setProperty(
+            "--avon-page-bg",
+            dark ? "#111318" : "#faf9f5",
+          );
+
+          if (themeColor) {
+            themeColor.setAttribute("content", dark ? "#111318" : "#faf9f5");
+          }
+
+          return;
+        }
+
+        root.classList.add("avon-homepage");
+        root.classList.toggle("avon-home-route", path === "/");
+
+        // Hero assets only matter on marketing/product surfaces.
+        var preloadDay = document.createElement("link");
+        preloadDay.rel = "preload";
+        preloadDay.as = "image";
+        preloadDay.fetchPriority = "high";
+        preloadDay.href = "/hero-sky-campus-day.webp";
+        preloadDay.type = "image/webp";
+        document.head.appendChild(preloadDay);
+
+        var preloadNight = document.createElement("link");
+        preloadNight.rel = "preload";
+        preloadNight.as = "image";
+        preloadNight.href = "/hero-sky-campus-night.webp";
+        preloadNight.type = "image/webp";
+        document.head.appendChild(preloadNight);
+
+        if (dark) {
+          root.style.setProperty("--avon-page-bg", "#111318");
+          root.style.setProperty("--avon-sky-blue", "#020511");
+          root.style.setProperty(
+            "--avon-hero-image",
+            'url("/hero-sky-campus-night.webp")',
+          );
+          root.style.setProperty("--avon-footer-bg", "#020511");
+          root.style.setProperty("--avon-footer-ground-bg", "#020511");
+          root.style.setProperty(
+            "--avon-footer-image",
+            'url("/hero-scenic-night.webp")',
+          );
+          root.style.setProperty(
+            "--avon-footer-overlay",
+            "linear-gradient(to bottom, rgb(2 5 17 / 70%), rgb(2 5 17 / 88%))",
+          );
+          root.style.setProperty(
+            "--avon-hero-border",
+            "rgb(255 255 255 / 20%)",
+          );
+
+          if (themeColor) {
+            themeColor.setAttribute("content", "#020511");
+          }
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div aria-hidden="true" class="avon-initial-nav">
+      <img
+        alt=""
+        class="avon-initial-nav__brand"
+        height="120"
+        src="/avon-logo.svg"
+        width="293"
+      />
+      <div class="avon-initial-nav__links">
+        <span class="avon-initial-nav__link avon-initial-nav__product">
+          Product
+          <svg fill="none" height="14" viewBox="0 0 24 24" width="14">
+            <path
+              d="m6 9 6 6 6-6"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+            />
+          </svg>
+        </span>
+        <span class="avon-initial-nav__link">Blog</span>
+        <span class="avon-initial-nav__link">Documentation</span>
+        <span class="avon-initial-nav__link">Contact</span>
+      </div>
+      <div class="avon-initial-nav__actions">
+        <span class="avon-initial-nav__sign-in">Sign in</span>
+      </div>
+      <span class="avon-initial-nav__menu">
+        <svg fill="none" height="16" viewBox="0 0 24 24" width="16">
+          <path
+            d="M4 6h16M4 12h16M4 18h16"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-width="2.25"
+          />
+        </svg>
+      </span>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

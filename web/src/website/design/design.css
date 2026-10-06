@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap");
+
+.avon-design {
+  --avon-blue: #003791;
+  --avon-green: #00a651;
+  --avon-ink: #111111;
+  --avon-line: #e8e8e3;
+  --avon-mist: #f4f4f1;
+  --avon-mute: #5e5e59;
+  --avon-paper: #ffffff;
+  --avon-red: #e60012;
+  --avon-yellow: #ffc20e;
+  background: var(--avon-paper);
+  color: var(--avon-ink);
+  font-family: Sora, ui-sans-serif, system-ui, sans-serif;
+}
+
+.avon-design[data-theme="dark"] {
+  --avon-ink: #f4f4f1;
+  --avon-line: #2a2b30;
+  --avon-mist: #18191d;
+  --avon-mute: #a8a8a2;
+  --avon-paper: #101114;
+}
+
+.avon-design-bands {
+  background: linear-gradient(
+    -38deg,
+    var(--avon-red) 0 25%,
+    var(--avon-yellow) 25% 50%,
+    var(--avon-green) 50% 75%,
+    var(--avon-blue) 75% 100%
+  );
+}
+
+.avon-design-corner {
+  background: linear-gradient(
+    -38deg,
+    transparent 42%,
+    var(--avon-red) 42% 56.5%,
+    var(--avon-yellow) 56.5% 71%,
+    var(--avon-green) 71% 85.5%,
+    var(--avon-blue) 85.5% 100%
+  );
+}

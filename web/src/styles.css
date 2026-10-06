@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+/*
+ * Website base + shared product chrome tokens (light t3code-style roles).
+ * Marketing scenery may still use stone utilities; product mocks bind to these.
+ */
+
+@theme {
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --font-mono:
+    ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas,
+    "Liberation Mono", monospace;
+  --color-zinc-25: oklch(99.2% 0 0);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --control-radius: 0.5rem;
+    --radius: 0.625rem;
+
+    /* Light t3code-style product palette */
+    --background: var(--color-zinc-25);
+    --foreground: var(--color-zinc-800);
+    --card: var(--color-white);
+    --card-foreground: var(--color-zinc-800);
+    --primary: oklch(0.488 0.217 264);
+    --primary-foreground: var(--color-white);
+    --secondary: var(--color-zinc-50);
+    --secondary-foreground: var(--color-zinc-800);
+    --muted: var(--color-zinc-50);
+    --muted-foreground: var(--color-zinc-500);
+    --accent: var(--color-zinc-100);
+    --accent-foreground: var(--color-zinc-900);
+    --border: var(--color-zinc-200);
+    --input: var(--color-zinc-300);
+    --ring: var(--primary);
+    --success: var(--color-emerald-500);
+    --success-foreground: var(--color-emerald-700);
+
+    --avon-sky-blue: var(--primary);
+    --avon-page-bg: #fff;
+
+    color: #181511;
+    background: #fff;
+    font-family: var(--font-sans);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  html {
+    overflow-x: clip;
+    overscroll-behavior-x: none;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  html.avon-homepage {
+    overscroll-behavior-y: none;
+  }
+
+  html.avon-homepage body {
+    overflow-x: clip;
+    overscroll-behavior: none;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  html.avon-homepage,
+  html.avon-homepage body {
+    background-color: var(--avon-footer-ground-bg, var(--avon-page-bg));
+  }
+
+  html.avon-blog,
+  html.avon-blog body {
+    background: var(--avon-blog-paint-bg, #faf9f5);
+  }
+}
